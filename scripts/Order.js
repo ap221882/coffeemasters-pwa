@@ -2,7 +2,7 @@ import Menu from "./Menu.js";
 
 const Order = {
   cart: [],
-  load: () => {
+  loadWS: () => {
     if (localStorage.getItem("cm-cart")) {
       try {
         Order.cart = JSON.parse(localStorage.getItem("cm-cart"));
@@ -12,7 +12,7 @@ const Order = {
       }
     }
   },
-  save: () => {
+  saveWS: () => {
     //~* good idea to have prefixes in storage keys as origin is shared between iframe, native application
     localStorage.setItem("cm-cart", JSON.stringify(Order.cart));
   },
