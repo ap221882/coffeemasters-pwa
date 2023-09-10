@@ -30,3 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
   Menu.load();
   Order.render();
 });
+
+//> register service worker
+
+navigator.serviceWorker.register("/serviceworker.js");
