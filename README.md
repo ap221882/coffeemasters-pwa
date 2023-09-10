@@ -17,3 +17,7 @@ This is a sample Progressive Web App for playing with Frontend Masters workshops
 
 - part of service worker spec but not tied to it
   // try `await caches.match("/data/images/blacktea.png")`
+
+#### Easy to use service worker implementation
+
+// WORKBOX

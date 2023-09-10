@@ -1,15 +1,34 @@
-self.addEventListener("fetch", (event) => {
-  //> for other routes
+// self.addEventListener("fetch", (event) => {
+//   //> for other routes
 
-  //* if (event.request.url === "/product-*") event.respondWith(fetch("/"));
+//   //* if (event.request.url === "/product-*") event.respondWith(fetch("/"));
 
+//   event.respondWith(
+//     (async () => {
+//       const cachedResponse = await caches.match(event.request);
+//       if (cachedResponse) {
+//         return cachedResponse;
+//       } else {
+//         return fetch(event.request);
+//       }
+//     })()
+//   );
+// });
+
+//* NETWORK FIRST APPROACH
+self.addEventListener("fetch", async (event) => {
   event.respondWith(
     (async () => {
-      const cachedResponse = await caches.match(event.request);
-      if (cachedResponse) {
-        return cachedResponse;
-      } else {
-        return fetch(event.request);
+      try {
+        const fetchResponse = await fetch(event.request);
+        //! TODO: UPDATE THE CACHE HERE
+        const cache = await caches.open("cm-updatedassets");
+        //# cloning needed because http responses in JS cant be reused - because they are streams - when you consume the stream, the stream(data) is gone
+        cache.put(event.request, fetchResponse.clone());
+        return fetchResponse;
+      } catch (e) {
+        const cachedResponse = await caches.match(event.request);
+        if (cachedResponse) return cachedResponse;
       }
     })()
   );
