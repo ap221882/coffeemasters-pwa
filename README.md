@@ -12,3 +12,8 @@ This is a sample Progressive Web App for playing with Frontend Masters workshops
 - Cursors
 - Filters by Cursors
 - Performance - measuring the performance of queries
+
+#### Cache storage
+
+- part of service worker spec but not tied to it
+  // try `await caches.match("/data/images/blacktea.png")`
